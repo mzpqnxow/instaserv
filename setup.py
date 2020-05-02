@@ -40,7 +40,6 @@ NAMESPACE = [USERNAME]
 NAME = '.'.join(NAMESPACE + [PROJECT_NAME])
 
 EXCLUDE_FILES = (
-    '.keep',
     'constraints.txt',
     'interactive',
     'pip.ini',
