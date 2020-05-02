@@ -17,7 +17,7 @@ deactivate 2>&1 2>/dev/null || ${FAKE_SUCCESS}
 # source venv/bin/activate || (echo Building venv && make rebuild && source venv/bin/activate)
 # echo Starting tftp server ...
 # nohup aterm -bg black -fg green -geometry 0x60x20 -e ${SUDO} ${VENV_BIN}/${PYTHON} ${VENV_BIN}/${TFTP_SERVER} -r ${TFTP_ROOT} &
-nohup xterm -bg black -T "${XTERM_TITLE}" -fg green -geometry 0x60x20 -e ${SUDO} ${VENV_BIN}/${PYTHON} -mSimpleHTTPServer 80 &
+xterm -bg black -T "${XTERM_TITLE}" -fg green -geometry 0x60x20 -e ${SUDO} ${VENV_BIN}/${PYTHON} -mSimpleHTTPServer 80 &
 if [ "$?" -eq "0" ]; then
   echo Started successfully @ "${TFTP_ROOT}" || echo Failed to start
 else

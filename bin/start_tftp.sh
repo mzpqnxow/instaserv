@@ -21,7 +21,7 @@ UMASK=000
 XTERM_TITLE='TFTP Server'
 ######################################################################
 deactivate 2>&1 2>/dev/null || ${FAKE_SUCCESS}
-nohup xterm -bg black -T "${XTERM_TITLE}" -fg green -geometry 0x60x20 -e ${SUDO} ${TFTP_SERVER} -r ${TFTP_ROOT} &
+nohup xterm -bg black -T "${XTERM_TITLE}" -fg green -geometry 0x60x20 -e ${SUDO} ${VENV_BIN}/${PYTHON} ${TFTP_SERVER} -r ${TFTP_ROOT} &
 if [ "$?" -eq "0" ]; then
   echo Started successfully @ "${TFTP_ROOT}" || echo Failed to start
 else

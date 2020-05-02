@@ -43,7 +43,8 @@ EXCLUDE_FILES = (
     'constraints.txt',
     'interactive',
     'pip.ini',
-    'pip.ini.socks')
+    'pip.ini.socks',
+    '.gitignore')
 LICENSE = 'BSD 3-Clause'
 PACKAGE_DATA_DIRS = ['serv/']
 PYTHON_REQUIRES = '>=3'
