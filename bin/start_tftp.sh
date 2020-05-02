@@ -11,8 +11,8 @@ fi
 # echo Starting tftp server ...
 
 declare -r VENV_ROOT="${VIRTUAL_ENV}"
-PYTHON=$(command -v python3)
-TFTP_SERVER="tftpy_server.py"
+PYTHON="$(command -v python3)"
+TFTP_SERVER="$(command -v tftpy_server.py)"
 TFTP_ROOT="${VENV_ROOT}/serv/tftproot"
 FAKE_SUCCESS=/bin/true
 USERNAME="$(whoami)"
@@ -21,7 +21,7 @@ UMASK=000
 XTERM_TITLE='TFTP Server'
 ######################################################################
 deactivate 2>&1 2>/dev/null || ${FAKE_SUCCESS}
-nohup xterm -bg black -T "${XTERM_TITLE}" -fg green -geometry 0x60x20 -e ${SUDO} ${PYTHON} ${TFTP_SERVER} -r ${TFTP_ROOT} &
+nohup xterm -bg black -T "${XTERM_TITLE}" -fg green -geometry 0x60x20 -e ${SUDO} ${PYTHON} ${TFTP_SERVER} -r ${TFTP_ROOT} 
 if [ "$?" -eq "0" ]; then
   echo Started successfully @ "${TFTP_ROOT}" || echo Failed to start
 else
