@@ -269,9 +269,9 @@ else
 endif
 	version=`echo $(v) | awk -F. -v OFS=. -v f=$(f) '{ $$f++ } 1'`
 	echo "Pushing tagged release $$version ..."
-	echo git tag -a $$version
-	echo git commit -am "Bumped to version $$version" || /bin/true
-	echo git push --tags
+	git tag -a $$version
+	git commit -am "Bumped to version $$version" || /bin/true
+	git push --tags
 	echo "Release pushed to repository"
 
 push: .FORCE
