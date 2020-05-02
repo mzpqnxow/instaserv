@@ -1,3 +1,4 @@
+nohup.out
 __pycache__/
 *.py[cod]
 *$py.class
@@ -49,3 +50,5 @@ venv/*
 !venv/requirements-base.txt
 !venv/requirements-project.txt
 !packages/
+!.keep
+!.gitignore
