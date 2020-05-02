@@ -16,38 +16,27 @@ from os.path import (
     abspath,
     dirname,
     join as join_path)
-from setuptools import (
-    setup,
-    find_packages)
-# You will need versioneer installed, or you can remove this if you don't plan to
-# use versioneer
+from setuptools import setup
 import versioneer
 
 
 def enumerate_static_content(basedir_list):
-    """Helper file to recursively enumerate static content to easily include data_files="""
+    """Recursively enumerate data files"""
     file_list = []
     for basedir in basedir_list:
         for path, _, files in walk(basedir):
-            file_list.append((path, [join_path(path, filename) for filename in files if filename not in EXCLUDE_FILES]))
+            file_list.append((path, [join_path(
+                path, file) for file in files if file not in EXCLUDE_FILES]))
     return file_list
 
 
 CURDIR = abspath(dirname(__file__))
 
-# Assume your package directory is mylib
-# Your full package name will be company.group.pypackagedir
-# This is based on the below
-# This is done for purposes of keeping a package repository
-# namespace "clean" so as to avoid collisions with other users'
-# packages
-
-PACKAGE = 'packagedir'
+PACKAGE = 'instaserv'
 PROJECT_NAME = 'py{}'.format(PACKAGE)
 
-ORG = 'company'
-OU = 'group'
-NAMESPACE = [ORG, OU]
+USERNAME = 'mzpqnxow'
+NAMESPACE = [USERNAME]
 NAME = '.'.join(NAMESPACE + [PROJECT_NAME])
 
 EXCLUDE_FILES = (
@@ -56,76 +45,17 @@ EXCLUDE_FILES = (
     'interactive',
     'pip.ini',
     'pip.ini.socks')
-LICENSE = 'Proprietary'
-# Include data files when installed
-PACKAGE_DATA_DIRS = ['etc/packagedir']
+LICENSE = 'BSD 3-Clause'
+PACKAGE_DATA_DIRS = ['serv/']
 PYTHON_REQUIRES = '>=3'
 
-# Set the install_requires value in setup.cfg, you don't need to change it here
-# REQUIRED = ['package1', 'package2', 'package3']
 SCRIPTS = glob('bin/*')
 
 DATA_FILE_LIST = enumerate_static_content(PACKAGE_DATA_DIRS)
 
-# ENTRY_POINTS = {
-#     'console_scripts': [
-#         'cli_app = app:main',
-#     ],
-# },
-
-# The below version uses versioneer, you'll need to remove `cmdclass` and change
-# `version` to a fixed string like `0.0.1` if you don't want to use versioneer
-# If you *do* want versioneer, you'll need to do `versioneer install` inside
-# the root of the project to bootstrap it, then make some changes to setup.cfg
 setup(
     cmdclass=versioneer.get_cmdclass(),
     version=versioneer.get_version(),
     data_files=DATA_FILE_LIST,
-    # The following can all be set in setup.cfg:
-    # include_package_data=True,
-    # install_requires=REQUIRED,
-    # license=LICENSE,
-    # name=NAME,
-    # Use setup.cfg:
-    # The line:
-    # packages = find:
-    # Is equivalent to the argument:
-    # packages=find_packages(),
-    # Use python_requires in setup.cfg instead
-    # python_requires=PYTHON_REQUIRES,
-    scripts=SCRIPTS
-)
-
-
-#
-# The above is a very barebones versioneer capable setuptools installer
-#
-# Here is an example for using
-# setuptools.setup() with a more exotic dependency
-#
-# setuptools.setup(
-#     ...
-#     required=['jq @ git+https://github.com/mzpqnxow/jq.py@setuptools-build#egg=jq']
-#     ...)
-#
-# Users have a way to force this behavior when installing as well by using constraints.txt
-#
-# If the above was written as:
-#
-# setuptools.setup(
-#     ...
-#     required=['jq']
-#     ...)
-#
-# ... then a constraints.txt file could be used as follows to force the jq package to use
-# the fork and specific branch with a line like this in the constraints file:
-#
-# ...
-# git+https://github.com/mzpqnxow/jq.py@setuptools-build#egg=jq
-# ...
-#
-# When pip goes to get the jq package, it consults the constraints before going
-# to any indexes that may be defined (e.g. PyPi) and honors this constraint. This
-# gives an end-user some control over packages that they don't maintain when there
-# are broken or "not-quite right" dependencies
-#
+    name=NAME,
+    scripts=SCRIPTS)
